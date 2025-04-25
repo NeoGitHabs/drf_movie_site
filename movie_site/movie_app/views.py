@@ -6,8 +6,8 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import UserProfile, Country, Director, Actor, Genre, Movie, MovieLanguages, MovieMoments, Rating, SaveToFavorite, FavoriteMovies, History
 from .filters import MovieFilter
-from .serializers import (UserProfileSerializers, CountrySerializers, DirectorSerializers, ActorSerializers,
-                          GenreSerializers, MovieSerializers, MovieDetailSerializers, MovieLanguagesSerializers, MovieMomentsSerializers,
+from .serializers import (UserProfileSerializers, CountrySerializers, DirectorSerializers, ActorSerializers, GenreSerializers, GenreDetailSerializers,
+                          MovieSerializers, MovieDetailSerializers, MovieLanguagesSerializers, MovieMomentsSerializers,
                           RatingSerializers, SaveToFavoriteSerializers, FavoriteMoviesSerializers, HistorySerializers,
                           LoginSerializer, UserSerializer)
 
@@ -45,7 +45,7 @@ class LogoutView(generics.GenericAPIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 # --------------------------------------------------------------------------------------
-class UserProfileViewSet(viewsets.ModelViewSet):
+class UserProfileAPIView(generics.ListAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializers
 
@@ -53,7 +53,15 @@ class CountryAPIView(generics.ListAPIView):
     queryset = Country.objects.all()
     serializer_class = CountrySerializers
 
+class CountryDetailAPIView(generics.RetrieveAPIView):
+    queryset = Country.objects.all()
+    serializer_class = CountrySerializers
+
 class DirectorAPIView(generics.ListAPIView):
+    queryset = Director.objects.all()
+    serializer_class = DirectorSerializers
+
+class DirectorDetailAPIView(generics.RetrieveAPIView):
     queryset = Director.objects.all()
     serializer_class = DirectorSerializers
 
@@ -61,9 +69,17 @@ class ActorAPIView(generics.ListAPIView):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializers
 
+class ActorDetailAPIView(generics.RetrieveAPIView):
+    queryset = Actor.objects.all()
+    serializer_class = ActorSerializers
+
 class GenreAPIView(generics.ListAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializers
+
+class GenreDetailAPIView(generics.RetrieveAPIView):
+    queryset = Genre.objects.all()
+    serializer_class = GenreDetailSerializers
 
 class MovieAPIView(generics.ListAPIView):
     queryset = Movie.objects.all()
@@ -78,31 +94,26 @@ class MovieDetailAPIView(generics.RetrieveAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieDetailSerializers
 
-    filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
-    filterset_class = MovieFilter
-    ordering_fields = ['year']
-    search_fields = ['movie_name']
-
-class MovieLanguagesViewSet(viewsets.ModelViewSet):
+class MovieLanguagesAPIView(generics.ListAPIView):
     queryset = MovieLanguages.objects.all()
     serializer_class = MovieLanguagesSerializers
 
-class MovieMomentsViewSet(viewsets.ModelViewSet):
+class MovieMomentsAPIView(generics.ListAPIView):
     queryset = MovieMoments.objects.all()
     serializer_class = MovieMomentsSerializers
 
-class RatingViewSet(viewsets.ModelViewSet):
+class RatingAPIView(generics.ListAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializers
 
-class SaveToFavoriteViewSet(viewsets.ModelViewSet):
+class SaveToFavoriteAPIView(generics.ListAPIView):
     queryset = SaveToFavorite.objects.all()
     serializer_class = SaveToFavoriteSerializers
 
-class FavoriteMoviesViewSet(viewsets.ModelViewSet):
+class FavoriteMoviesAPIView(generics.ListAPIView):
     queryset = FavoriteMovies.objects.all()
     serializer_class = FavoriteMoviesSerializers
 
-class HistoryViewSet(viewsets.ModelViewSet):
+class HistoryAPIView(generics.ListAPIView):
     queryset = History.objects.all()
     serializer_class = HistorySerializers

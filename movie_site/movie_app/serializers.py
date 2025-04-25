@@ -7,8 +7,7 @@ from .models import UserProfile, Country, Director, Actor, Genre, Movie, MovieLa
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ('username', 'email', 'password', 'first_name', 'last_name',
-                  'age', 'phone_number', 'status')
+        fields = ('username', 'email', 'password', 'first_name', 'last_name', 'age', 'phone_number', 'status')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -88,14 +87,18 @@ class GenreSerializers(serializers.ModelSerializer):
         model = Genre
         fields = ['genre_name']
 
+class GenreDetailSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ['genre_name']
+
 class MovieSerializers(serializers.ModelSerializer):
     year = serializers.DateField(format('%Y'))
     genre = GenreSerializers(many=True)
     country = CountrySerializers()
     class Meta:
         model = Movie
-        fields = ['id', 'movie_name', 'movie_image', 'year', 'genre',
-                  'country', 'status_movie']
+        fields = ['id', 'movie_name', 'movie_image', 'year', 'genre', 'country', 'status_movie']
 
 class MovieMomentsSerializers(serializers.ModelSerializer):
     class Meta:
@@ -146,9 +149,9 @@ class SaveToFavoriteSerializers(serializers.ModelSerializer):
 class FavoriteMoviesSerializers(serializers.ModelSerializer):
     class Meta:
         model = FavoriteMovies
-        fields = '__all__'
+        fields = ['movie', 'save_to_favorite']
 
 class HistorySerializers(serializers.ModelSerializer):
     class Meta:
         model = History
-        fields = '__all__'
+        fields = ['user', 'movie', 'viewed_at']
