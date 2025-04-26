@@ -6,7 +6,7 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import UserProfile, Country, Director, Actor, Genre, Movie, MovieLanguages, MovieMoments, Rating, SaveToFavorite, FavoriteMovies, History
 from .filters import MovieFilter
-from .serializers import (UserProfileSerializers, CountrySerializers, DirectorSerializers, ActorSerializers, GenreSerializers, GenreDetailSerializers,
+from .serializers import (UserProfileSerializers, CountrySerializers, CountryDetailSerializers, DirectorSerializers, ActorSerializers, GenreSerializers, GenreDetailSerializers,
                           MovieSerializers, MovieDetailSerializers, MovieLanguagesSerializers, MovieMomentsSerializers,
                           RatingSerializers, SaveToFavoriteSerializers, FavoriteMoviesSerializers, HistorySerializers,
                           LoginSerializer, UserSerializer)
@@ -55,7 +55,7 @@ class CountryAPIView(generics.ListAPIView):
 
 class CountryDetailAPIView(generics.RetrieveAPIView):
     queryset = Country.objects.all()
-    serializer_class = CountrySerializers
+    serializer_class = CountryDetailSerializers
 
 class DirectorAPIView(generics.ListAPIView):
     queryset = Director.objects.all()

@@ -62,6 +62,11 @@ class CountrySerializers(serializers.ModelSerializer):
         model = Country
         fields = ['country_name']
 
+class CountryDetailSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Country
+        fields = ['country_name']
+
 class DirectorSerializers(serializers.ModelSerializer):
     class Meta:
         model = Director
