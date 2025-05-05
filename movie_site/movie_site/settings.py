@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-    "phone-number_field",
+    'phonenumber_field',
     'django_filters',
 ]
 
@@ -102,6 +102,7 @@ LANGUAGES = [
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
