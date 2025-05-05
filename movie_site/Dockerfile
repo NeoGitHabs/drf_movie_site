@@ -10,7 +10,7 @@ RUN pip install --upgrade pip && \
 
 COPY . /app/
 # Устанавливаем права на исполнение для manage.py
-RUN sudo chmod +x /app/manage.py
+RUN chmod +x /app/manage.py
 
 COPY nginx/nginx.conf /etc/nginx/conf.d/
 

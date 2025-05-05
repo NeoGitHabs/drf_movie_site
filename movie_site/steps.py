@@ -108,5 +108,3 @@ COPY . /app/
 25) sudo docker-compose up --build -d
 26) sudo docker-compose ps
 27) sudo docker-compose logs
-
-
