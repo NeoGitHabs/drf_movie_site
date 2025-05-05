@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-    "phonenumber_field",
+    "phone-number_field",
     'django_filters',
 ]
 
@@ -96,7 +96,7 @@ USE_L10N = True
 
 LANGUAGES = [
     ('en', 'English'),
-    ('ru', 'Русский'),
+    ('ru', 'Russian'),
 ]
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
