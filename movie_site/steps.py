@@ -104,7 +104,7 @@ COPY . /app/
 21) sudo systemctl status docker
 22) завершим настройку CTRL + C
 23) проекттин ичине киребиз
-24) chmod +x manage.py
+24) sudo chmod +x manage.py
 25) sudo docker-compose up --build -d
 26) sudo docker-compose ps
 27) sudo docker-compose logs
