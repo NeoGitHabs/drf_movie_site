@@ -29,18 +29,18 @@ server {
         alias /app/media/;
     }
 }
-3.0) главный проекттин ичине 'docker-compose.yml' файл тузуп ал файлдын ичине бул кодду коёбуз жана 'core' текстти проекттин атына алмаштырабыз:
-version: '3'
+3.0) главный проекттин ичине 'docker-compose.yml' файл тузуп ал файлдын ичине бул кодду коёбуз жана 'core' текстти [проекттин атына] алмаштырабыз:
+version: '3.8'
 
 services:
 
   web:
     build: .
     command: >
-      bash -c "./manage.py collectstatic --noinput && ./manage.py makemigrations && ./manage.py migrate && gunicorn -b 0.0.0.0:8000 movie_site.wsgi:application"
+      bash -c "./manage.py collectstatic --noinput && ./manage.py makemigrations && ./manage.py migrate && gunicorn -b 0.0.0.0:8000 [название проекта].wsgi:application"
     volumes:
       - .:/app
-      - static_volume:/app/static
+      - /home/ubuntu/[название главного проекта]/[названиие проекта]/static_files:/app/static
       - media_volume:/app/media
     ports:
       - "8000:8000"
@@ -62,14 +62,13 @@ services:
     ports:
       - "80:80"
     volumes:
-      - static_volume:/app/static
+      - /home/ubuntu/[название главного проекта]/[названиие проекта]/static_files:/app/static
       - media_volume:/app/media
     depends_on:
       - web
 
 volumes:
   postgres_data:
-  static_volume:
   media_volume:
 4.0) главный проекттин ичине 'Dockerfile' файл тузуп ал файлдын ичине бул кодду коёбуз жана главный проекттин 'requirements.txt' файлынын аты коддун ичиндеги 'requirements.txt' текстине (2 жерде) окшоштуруп коёбуз:
 FROM python:3.12
