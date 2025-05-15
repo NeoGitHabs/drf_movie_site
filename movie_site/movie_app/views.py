@@ -1,7 +1,7 @@
 from  rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework import status, generics, viewsets
+from rest_framework import status, generics, viewsets, permissions
 from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import UserProfile, Country, Director, Actor, Genre, Movie, MovieLanguages, MovieMoments, Rating, SaveToFavorite, FavoriteMovies, History
@@ -10,6 +10,7 @@ from .serializers import (UserProfileSerializers, CountrySerializers, CountryDet
                           MovieSerializers, MovieDetailSerializers, MovieLanguagesSerializers, MovieMomentsSerializers,
                           RatingSerializers, SaveToFavoriteSerializers, FavoriteMoviesSerializers, HistorySerializers,
                           LoginSerializer, UserSerializer)
+from .permissions import CheckRole
 
 
 class RegisterView(generics.CreateAPIView):
@@ -48,6 +49,7 @@ class LogoutView(generics.GenericAPIView):
 class UserProfileAPIView(generics.ListAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializers
+    permission_classes = [permissions.IsAdminUser]
 
 class CountryAPIView(generics.ListAPIView):
     queryset = Country.objects.all()
@@ -93,6 +95,7 @@ class MovieAPIView(generics.ListAPIView):
 class MovieDetailAPIView(generics.RetrieveAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieDetailSerializers
+    permission_classes = [permissions.IsAuthenticated, CheckRole]
 
 class MovieLanguagesAPIView(generics.ListAPIView):
     queryset = MovieLanguages.objects.all()

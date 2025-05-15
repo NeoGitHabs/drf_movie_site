@@ -10,7 +10,7 @@ from .views import (UserProfileAPIView, CountryAPIView, CountryDetailAPIView, Di
 urlpatterns = [
     # path('', include(router.urls)),
     path('', MovieAPIView.as_view(), name = 'movies'),
-    path('movie/<int:pk>/', MovieDetailAPIView.as_view(), name = 'movie_details'),
+    path('<int:pk>/', MovieDetailAPIView.as_view(), name = 'movie_details'),
     path('genre/', GenreAPIView.as_view(), name = 'genrs'),
     path('genre/<int:pk>/', GenreAPIView.as_view(), name = 'genrs-details'),
     path('country/', CountryAPIView.as_view(), name = 'countries'),
@@ -23,6 +23,7 @@ urlpatterns = [
     path('history/', HistoryAPIView.as_view(), name = 'histories'),
     path('favorite_movie/', FavoriteMoviesAPIView.as_view(), name = 'favorite_movies'),
     path('user/', UserProfileAPIView.as_view(), name = 'user'),
+
     path('register/', RegisterView.as_view(), name = 'register'),
     path('login/', CustomLoginView.as_view(), name = 'login'),
     path('logout/', LogoutView.as_view(), name = 'logout'),
