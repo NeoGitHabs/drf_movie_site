@@ -6,4 +6,3 @@ class CheckRole(permissions.BasePermission):
         if request.user.status == 'pro':
             return True
         return False
-
