@@ -1,7 +1,9 @@
 from rest_framework import routers
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-from .views import (UserProfileAPIView, CountryAPIView, CountryDetailAPIView, DirectorAPIView, DirectorDetailAPIView, ActorAPIView, ActorDetailAPIView, GenreAPIView, MovieAPIView, MovieDetailAPIView, MovieLanguagesAPIView, MovieMomentsAPIView, RatingAPIView, SaveToFavoriteAPIView, FavoriteMoviesAPIView, HistoryAPIView, RegisterView, CustomLoginView, LogoutView)
+from .views import (UserProfileAPIView, CountryAPIView, CountryDetailAPIView, DirectorAPIView, DirectorDetailAPIView,
+                    ActorAPIView, ActorDetailAPIView, GenreAPIView, MovieAPIView, MovieDetailAPIView, FavoriteMoviesAPIView, HistoryAPIView,
+                    RegisterView, CustomLoginView, LogoutView, RatingAPIView)
 
 
 # router = routers.SimpleRouter()
@@ -23,6 +25,7 @@ urlpatterns = [
     path('history/', HistoryAPIView.as_view(), name = 'histories'),
     path('favorite_movie/', FavoriteMoviesAPIView.as_view(), name = 'favorite_movies'),
     path('user/', UserProfileAPIView.as_view(), name = 'user'),
+    path('rating/', RatingAPIView.as_view(), name = 'ratings'),
 
     path('register/', RegisterView.as_view(), name = 'register'),
     path('login/', CustomLoginView.as_view(), name = 'login'),

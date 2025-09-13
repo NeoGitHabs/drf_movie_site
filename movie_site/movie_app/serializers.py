@@ -2,6 +2,16 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 from .models import UserProfile, Country, Director, Actor, Genre, Movie, MovieLanguages, MovieMoments, Rating, SaveToFavorite, FavoriteMovies, History
+import os
+import joblib
+from django.conf import settings
+
+
+model_path = os.path.join(settings.BASE_DIR, 'model_nb.pkl')
+model = joblib.load(model_path)
+
+vector_path = os.path.join(settings.BASE_DIR, 'vector.pkl')
+vector = joblib.load(vector_path)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -119,9 +129,13 @@ class RatingSerializers(serializers.ModelSerializer):
     user = UserProfileMovieDetailSerializers()
     parent = UserProfileMovieDetailSerializers(source='parent.user', read_only=True, allow_null=True)
     created_date = serializers.DateTimeField(format='%d-%m-%Y %H:%M')
+    check_comments = serializers.SerializerMethodField()
     class Meta:
         model = Rating
-        fields = ['user', 'parent', 'text', 'stars', 'created_date']
+        fields = ['user', 'parent', 'text', 'stars', 'created_date', 'check_comments']
+
+    def get_check_comments(self, obj):
+        return model.predict(vector.transform([obj.text]))
 
 class MovieDetailSerializers(serializers.ModelSerializer):
     director = DirectorMovieDetailSerializers(many=True)

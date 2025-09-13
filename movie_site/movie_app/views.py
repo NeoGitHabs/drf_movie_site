@@ -1,16 +1,17 @@
 from  rest_framework.response import Response
+from .permissions import CheckRole
+from .filters import MovieFilter
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework import status, generics, viewsets, permissions
+from rest_framework import status, generics, views, permissions
 from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import UserProfile, Country, Director, Actor, Genre, Movie, MovieLanguages, MovieMoments, Rating, SaveToFavorite, FavoriteMovies, History
-from .filters import MovieFilter
 from .serializers import (UserProfileSerializers, CountrySerializers, CountryDetailSerializers, DirectorSerializers, ActorSerializers, GenreSerializers, GenreDetailSerializers,
                           MovieSerializers, MovieDetailSerializers, MovieLanguagesSerializers, MovieMomentsSerializers,
                           RatingSerializers, SaveToFavoriteSerializers, FavoriteMoviesSerializers, HistorySerializers,
                           LoginSerializer, UserSerializer)
-from .permissions import CheckRole
+
 
 
 class RegisterView(generics.CreateAPIView):
